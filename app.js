@@ -45,6 +45,27 @@ async function showPosts() {
     });
 }
 
+// Filter posts by input
+function filterPosts(e) {
+    // Get whats typed
+    const term = e.target.value.toUpperCase();
+    const posts = document.querySelectorAll(".post");
+
+    // posts will return a NodeList which is basically an array, so loop trough
+    posts.forEach((post) => {
+        const title = post.querySelector(".post-title").innerText.toUpperCase();
+        const body = post.querySelector(".post-body").innerText.toUpperCase();
+
+        // indexOf will search for anything that's passed in input
+        // If it doesn't match, it returns -1
+        if (title.indexOf(term) > -1 || body.indexOf(term) > -1) {
+            post.style.display = "flex";
+        } else {
+            post.style.display = "none";
+        }
+    });
+}
+
 // Show initial posts
 showPosts();
 
@@ -69,3 +90,5 @@ window.addEventListener("scroll", () => {
         showLoading();
     }
 });
+
+filter.addEventListener("input", filterPosts);
