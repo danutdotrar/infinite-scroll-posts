@@ -25,8 +25,25 @@ async function showPosts() {
     // getPosts returns a promise so we need to await on that
     const posts = await getPosts();
 
+    console.log(posts);
     // For each post, create a new element
-    posts.forEach((post) => {});
+    posts.forEach((post) => {
+        // Create a post div
+        const postEl = document.createElement("div");
+        postEl.classList.add("post");
+
+        // Create HTML structure
+        postEl.innerHTML = `
+        <div class="number">${post.id}</div>
+                <div class="post-info">
+                    <h2 class="post-title">${post.title}</h2>
+                    <p class="post-body">
+                        ${post.body}
+                    </p>
+                </div>
+        `;
+        postContainer.appendChild(postEl);
+    });
 }
 
 //Show initial posts
