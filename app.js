@@ -2,14 +2,14 @@ const postContainer = document.getElementById("posts-container");
 const loading = document.querySelector(".loader");
 const filter = document.getElementById("filter");
 
-let limit = 3;
+let limit = 5;
 let page = 1;
 
 // Fetch the post from API
 async function getPosts() {
     // Await fetch request
     const res = await fetch(
-        `https://jsonplaceholder.typicode.com/posts?_limit=${limit}_page=${page}`
+        `https://jsonplaceholder.typicode.com/posts?_limit=${limit}&_page=${page}`
     );
 
     // Get data back
@@ -25,7 +25,6 @@ async function showPosts() {
     // getPosts returns a promise so we need to await on that
     const posts = await getPosts();
 
-    console.log(posts);
     // For each post, create a new element
     posts.forEach((post) => {
         // Create a post div
@@ -46,5 +45,27 @@ async function showPosts() {
     });
 }
 
-//Show initial posts
+// Show initial posts
 showPosts();
+
+// Show loader and fetch more posts
+function showLoading() {
+    loading.classList.add("show");
+
+    setTimeout(() => {
+        loading.classList.remove("show");
+
+        setTimeout(() => {
+            page++;
+            showPosts();
+        }, 300);
+    }, 1000);
+}
+
+window.addEventListener("scroll", () => {
+    const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+
+    if (scrollTop + clientHeight >= scrollHeight - 5) {
+        showLoading();
+    }
+});

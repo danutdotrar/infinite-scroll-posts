@@ -34,6 +34,7 @@ h1 {
 .filter {
     width: 100%;
     padding: 12px;
+    font-size: 16px;
 }
 
 .post {
@@ -78,7 +79,7 @@ h1 {
 }
 
 .loader {
-    /* opacity: 0; */
+    opacity: 0;
     display: flex;
     position: fixed;
     bottom: 50px;
