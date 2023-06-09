@@ -2,6 +2,7 @@ const postContainer = document.getElementById("posts-container");
 const loading = document.querySelector(".loader");
 const filter = document.getElementById("filter");
 
+// Limits for the fetch link
 let limit = 5;
 let page = 1;
 
